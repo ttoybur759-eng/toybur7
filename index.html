@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOYBUR Love Link Generator</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+body { margin:0; padding:0; font-family:'Arial', sans-serif; text-align:center; background:#000; color:#fff; }
+.background-name { position:fixed; top:0; left:0; width:100%; height:100%; font-size:5em; color: rgba(255,255,255,0.05); display:flex; justify-content:center; align-items:center; flex-wrap:wrap; pointer-events:none; z-index:0; }
+h1 { font-family:'Pacifico', cursive; font-size:3em; color:#ff69b4; text-shadow:2px 2px 10px #ff1493; position:relative; z-index:1; margin-bottom:20px; }
+input, textarea, button { font-size:1em; padding:10px; margin:10px 0; border-radius:10px; border:none; outline:none; position:relative; z-index:1; }
+input, textarea { width:80%; max-width:400px; }
+button { background: linear-gradient(45deg, #ff69b4, #ff1493); color:white; cursor:pointer; transition:0.3s; }
+button:hover { transform: scale(1.1); }
+.output { margin-top:20px; word-break:break-all; color:#fff; position:relative; z-index:1; }
+.footer { margin-top:50px; color:#fff; font-size:1em; position:relative; z-index:1; }
+</style>
+</head>
+<body>
+
+<div class="background-name">TOYBUR TOYBUR TOYBUR TOYBUR</div>
+
+<h1>💖 TOYBUR 💖</h1>
+<p>আপনার প্রিয় মানুষকে ভালোবাসা ও শুভেচ্ছা জানাতে ফর্ম পূরণ করুন:</p>
+
+<input type="text" id="yourName" placeholder="আপনার নাম লিখুন"><br>
+<input type="text" id="friendName" placeholder="আপনার প্রিয় মানুষের নাম লিখুন"><br>
+<textarea id="message" placeholder="আপনার মেসেজ লিখুন" rows="3" cols="30"></textarea><br>
+<button onclick="generateLink()">লভ লিংক তৈরি করুন</button>
+
+<div class="output" id="output"></div>
+<div class="footer">💌 তৈরি করেছেন TOYBUR</div>
+
+<script>
+function generateLink() {
+    let yourName = document.getElementById('yourName').value.trim();
+    let friendName = document.getElementById('friendName').value.trim();
+    let message = document.getElementById('message').value.trim();
+
+    if(!yourName || !friendName || !message){
+        alert("সব ফিল্ড পূরণ করুন!");
+        return;
+    }
+
+    let encodedName = encodeURIComponent(yourName);
+    let encodedFriend = encodeURIComponent(friendName);
+    let encodedMsg = encodeURIComponent(message);
+
+    // আলাদা লভ পেজ লিংক
+    let link = `love.html?yourName=${encodedName}&friendName=${encodedFriend}&message=${encodedMsg}`;
+
+    document.getElementById('output').innerHTML = `
+        আপনার লভ লিংক তৈরি হয়েছে!<br>
+        <input type="text" value="${link}" id="copyLink" readonly style="width:80%; max-width:400px;">
+        <button onclick="copyLink()">কপি করুন</button>
+    `;
+}
+
+function copyLink() {
+    let copyText = document.getElementById("copyLink");
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    navigator.clipboard.writeText(copyText.value);
+    alert("লভ লিংক কপি করা হয়েছে!");
+}
+</script>
+</body>
+</html>
